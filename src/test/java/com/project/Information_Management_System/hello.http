@@ -1,0 +1,2 @@
+GET http://localhost:8080/api/helloWorld
+//직접 주소창에 써보지 않고 테스트 해불 수 있음. 단 서버 열어놔야함
