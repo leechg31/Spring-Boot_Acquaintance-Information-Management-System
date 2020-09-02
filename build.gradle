@@ -36,6 +36,11 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
 	testCompile group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.6.2'
 
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.h2database:h2'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 }
 
 test {
