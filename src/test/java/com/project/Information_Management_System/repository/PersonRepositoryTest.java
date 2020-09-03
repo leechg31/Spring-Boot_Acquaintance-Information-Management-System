@@ -22,15 +22,17 @@ class PersonRepositoryTest {
 
         person.setAge(26);
         person.setName("이성재");
+        person.setBloodType("A");
 
         personRepository.save(person);  //Entity 저장
 
-        //System.out.println(personRepository.findAll());
+        System.out.println(personRepository.findAll());
 
         List<Person> people = personRepository.findAll();
 
         assertThat(people.size()).isEqualTo(1);
         assertThat(people.get(0).getName()).isEqualTo("이성재");
         assertThat(people.get(0).getAge()).isEqualTo(26);
+        assertThat(people.get(0).getBloodType()).isEqualTo("A");
     }
 }

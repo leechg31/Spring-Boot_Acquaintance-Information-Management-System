@@ -1,10 +1,18 @@
 package com.project.Information_Management_System.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
 @Entity
+@Getter  //Setting -> Build, Execution, Deployment -> Annotation processors
+@Setter
+@ToString
 public class Person {
 
     @Id
@@ -12,39 +20,13 @@ public class Person {
     private long id;
 
     private String name;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
     private int age;
+    private String hobby;
+    private String bloodType;
+    private String address;
+    private LocalDate birthday;
+    private String job;
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
-    }
+    @ToString.Exclude
+    private String phoneNumber;
 }
