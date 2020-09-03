@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,4 +36,25 @@ class PersonRepositoryTest {
         assertThat(people.get(0).getAge()).isEqualTo(26);
         assertThat(people.get(0).getBloodType()).isEqualTo("A");
     }
+
+    @Test
+    void allArgsConstructor() {
+        Person person1 = new Person(1L,"이성재",26,"몰라도대","A","송파동 161 미성APT 1-505", LocalDate.of(2020,9,4),"학생","010-8805-0632");
+    }
+
+    @Test
+    void constructTest(){
+        Person person2 = new Person("이성재",26);
+    }
+
+    @Test
+    void hashCodeAndEquals() {
+        Person person3_1 = new Person("LeeSungJae",26);
+        Person person3_2 = new Person("LeeSungJae",26);
+
+        System.out.println(person3_1.equals(person3_2));
+        System.out.println(person3_1.hashCode());
+        System.out.println(person3_2.hashCode());
+    }
+
 }
