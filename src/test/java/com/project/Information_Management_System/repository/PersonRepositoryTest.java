@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,17 +46,23 @@ class PersonRepositoryTest {
 
     @Test
     void constructTest(){
-        Person person2 = new Person("이성재",26);
+        Person person2 = new Person("이성재",26,"A");
     }
 
     @Test
     void hashCodeAndEquals() {
-        Person person3_1 = new Person("LeeSungJae",26);
-        Person person3_2 = new Person("LeeSungJae",26);
+        Person person3_1 = new Person("LeeSungJae",26,"A");
+        Person person3_2 = new Person("LeeSungJae",26,"A");
 
         System.out.println(person3_1.equals(person3_2));
         System.out.println(person3_1.hashCode());
         System.out.println(person3_2.hashCode());
+
+        HashMap<Person,Integer> map = new HashMap<>();
+        map.put(person3_1,person3_1.getAge());
+
+        System.out.println(map);
+        System.out.println(map.get(person3_2));  //HashCode가 같아야 가져올 수 있음. 즉 완전히 같은 객체여야 가져옴
     }
 
 }
