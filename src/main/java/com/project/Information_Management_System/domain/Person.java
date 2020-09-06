@@ -5,12 +5,14 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
 @NoArgsConstructor  //인자가 없는 생성자
 @AllArgsConstructor  //모든 데이터를 인자로 갖는 생성자
+@RequiredArgsConstructor
 @Data  // @Getter, @Setter, @RequiredArgsConstructor, @ToString, @EqualsAndHashCode 다 포함 -> ctrl + b 로 확인
 public class Person {
 
@@ -35,5 +37,8 @@ public class Person {
 
     @ToString.Exclude
     private String phoneNumber;
+
+    @OneToOne  //relation
+    private Block block;
 
 }
