@@ -12,18 +12,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class PersonService {  //BlockRepository와 PersonRepository 연결
-
-    @Autowired
-    private BlockRepository blockRepository;
-
     @Autowired
     private PersonRepository personRepository;
 
     public List<Person> getPeopleExcludeBlocks() {
         List<Person> people = personRepository.findAll();
-        List<Block> blocks = blockRepository.findAll();
-        List<String> blockNames = blocks.stream().map(Block::getName).collect(Collectors.toList());  //Name만 뽑아옴
 
-        return people.stream().filter(person -> !blockNames.contains(person.getName())).collect(Collectors.toList());  //people에서 blocknames만 제외하고 다 가져옴
+        return people.stream().filter(person -> person.getBlock() == null).collect(Collectors.toList());  //people에서 blocknames만 제외하고 다 가져옴
     }
 }

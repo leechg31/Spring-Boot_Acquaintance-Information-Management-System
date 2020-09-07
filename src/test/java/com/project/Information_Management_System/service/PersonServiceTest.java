@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -21,42 +22,46 @@ class PersonServiceTest {
     @Autowired
     private PersonRepository personRepository;
 
-    @Autowired
-    private BlockRepository blockRepository;
-
     @Test
     void getPeopleExcludeBlocks() {
 
         givenPeople();
-        givenBlocks();
 
         List<Person> result = personService.getPeopleExcludeBlocks();
 
         System.out.println(result);
     }
 
-    public void givenBlockPerson(String name, int age,String bloodType) {
-        Person blockPerson = new Person(name,age,bloodType);
-        blockPerson.setBlock(givenBlock(name));
+    @Test
+    void cascadeTest() {
+        givenPeople();
 
-        personRepository.save(blockPerson);
+        List<Person> result = personRepository.findAll();
+
+        result.forEach(System.out::println);
+
+        Person person = result.get(3);
+        person.getBlock().setStartDate(LocalDate.now());
+        person.getBlock().setEndDate(LocalDate.now());
+
+        personRepository.save(person);
+        personRepository.findAll().forEach(System.out::println);
     }
 
-    private void givenBlocks() {
-        givenBlock("이성재");
+    public void givenBlockPerson(String name, int age,String bloodType) {
+        Person blockPerson = new Person(name,age,bloodType);
+        blockPerson.setBlock(new Block(name));
+        personRepository.save(blockPerson);
     }
 
     private void givenPeople() {
 
         givenPerson("이성재",26,"A");
         givenPerson("박지수",27,"O");
-        givenPerson("전기태",28,"AB");
+        givenPerson("전윤재",26,"AB");
         givenBlockPerson("이성재",27,"AB");
     }
 
-    private Block givenBlock(String name) {
-        return blockRepository.save(new Block(name));
-    }
 
     private void givenPerson(String name, int age, String bloodType) {
         personRepository.save(new Person(name,age,bloodType));

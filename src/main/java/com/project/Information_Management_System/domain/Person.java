@@ -1,11 +1,10 @@
 package com.project.Information_Management_System.domain;
 
 import lombok.*;
+import lombok.experimental.FieldNameConstants;
+import net.bytebuddy.asm.Advice;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -38,7 +37,7 @@ public class Person {
     @ToString.Exclude
     private String phoneNumber;
 
-    @OneToOne  //relation
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})  //relation
     private Block block;
 
 }
