@@ -37,7 +37,7 @@ public class Person {
     @ToString.Exclude
     private String phoneNumber;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})  //relation
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true /*블럭이 해제되는 순간 블럭이 삭제*/, fetch = FetchType.EAGER  /*fetch를 EAGER 타입으로 진행*/)  //relation
     private Block block;
 
 }

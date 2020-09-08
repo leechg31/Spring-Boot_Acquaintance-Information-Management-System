@@ -22,6 +22,9 @@ class PersonServiceTest {
     @Autowired
     private PersonRepository personRepository;
 
+    @Autowired
+    private BlockRepository blockRepository;
+
     @Test
     void getPeopleExcludeBlocks() {
 
@@ -29,7 +32,7 @@ class PersonServiceTest {
 
         List<Person> result = personService.getPeopleExcludeBlocks();
 
-        System.out.println(result);
+        //System.out.println(result);
     }
 
     @Test
@@ -38,12 +41,26 @@ class PersonServiceTest {
 
         List<Person> result = personRepository.findAll();
 
+        System.out.println("\nresult\n");
         result.forEach(System.out::println);
 
         Person person = result.get(3);
         person.getBlock().setStartDate(LocalDate.now());
         person.getBlock().setEndDate(LocalDate.now());
 
+        personRepository.save(person);
+        System.out.println("\npersonRepository.findAll\n");
+        personRepository.findAll().forEach(System.out::println);
+/*
+        personRepository.delete(person);
+        System.out.println("\npersonRepository.deleteAll\n");
+        personRepository.findAll().forEach(System.out::println);
+
+        System.out.println("\nblockRepository.findAll\n");
+        blockRepository.findAll().forEach(System.out::println);*/
+
+        System.out.println("\nperson.setBlock(null).findAll\n");
+        person.setBlock(null);
         personRepository.save(person);
         personRepository.findAll().forEach(System.out::println);
     }
