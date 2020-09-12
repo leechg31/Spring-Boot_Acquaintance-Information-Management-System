@@ -20,4 +20,12 @@ public class PersonService {  //BlockRepository와 PersonRepository 연결
 
         return people.stream().filter(person -> person.getBlock() == null).collect(Collectors.toList());  //people에서 blocknames만 제외하고 다 가져옴
     }
+
+    public Person getPerson(long id) {
+        Person person = personRepository.findById(id).get();
+
+        System.out.println("사람 : "+person);
+
+        return person;
+    }
 }
